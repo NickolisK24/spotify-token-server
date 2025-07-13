@@ -6,7 +6,11 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(cors()); // Allow frontend from any origin
+// 🔒 Restrict CORS to your frontend
+app.use(cors({
+  origin: 'https://nickolis-kacludis-musicgen.vercel.app', // <-- Vercel frontend
+  methods: ['GET'],
+}));
 
 app.get('/token', async (req, res) => {
   try {
